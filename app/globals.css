@@ -1,8 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-cream: #f7f2e7;       /* background utama */
+  --color-card: #fffdf9;        /* NEW: background card, sedikit lebih terang dari cream */
+  --color-dark: #1c1a17;        /* navbar, footer, overlay gelap */
+  --color-dark-soft: #2a2622;   /* card gelap sekunder */
+  --color-terracotta: #b5622f;  /* aksen tombol/CTA */
+  --color-terracotta-hover: #9c5127;
+  --color-terracotta-soft: #f3e3d3; /* NEW: background ikon WA / badge lembut */
+  --color-text: #2b2620;        /* teks di atas cream */
+  --color-text-muted: #6b6258;  /* teks sekunder */
+
+  --background: var(--color-cream);
+  --foreground: var(--color-text);
 }
 
 @theme inline {
@@ -12,15 +22,36 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-slide-up {
+  animation: fadeSlideUp 0.5s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
 }
