@@ -87,12 +87,12 @@ export default function VirtualTour() {
                   >
                     {t.virtualTour.yes}
                   </button>
-                  <button
+                  {/* <button
                     onClick={() => setShowAudioPrompt(false)}
                     className="rounded-md bg-(--color-dark)/80 px-4 py-1.5 text-xs font-medium text-white transition-colors hover:bg-(--color-dark)"
                   >
                     {t.virtualTour.no}
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
