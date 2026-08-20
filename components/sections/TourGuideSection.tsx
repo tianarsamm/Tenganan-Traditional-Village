@@ -10,9 +10,9 @@ export default function TourGuideSection() {
   return (
     <section id="tour-guide" className="bg-(--color-cream) px-6 py-20 md:px-12">
       <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-2">
-        <div className="relative aspect-4/3 w-full overflow-hidden rounded-xl md:order-1">
+        <div className="relative aspect-4/4 w-full overflow-hidden rounded-xl md:order-1">
           <Image
-            src="/images/desa/6.jpg"
+            src="/images/tourguide/5.png"
             alt={t.tourGuide.title}
             fill
             className="object-cover"
