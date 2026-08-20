@@ -109,7 +109,7 @@ export default function VirtualTour() {
 
           {/* Bottom bar */}
           <div className="absolute inset-x-0 bottom-0 z-10 flex items-center justify-between bg-(--color-dark)/60 px-4 py-2.5 backdrop-blur-sm">
-            <nav className="hidden gap-4 text-[10px] font-semibold uppercase tracking-wider text-white/80 sm:flex">
+            {/* <nav className="hidden gap-4 text-[10px] font-semibold uppercase tracking-wider text-white/80 sm:flex">
               <a href="#beranda" className="hover:text-(--color-terracotta)">
                 {t.virtualTour.navHome}
               </a>
@@ -122,7 +122,7 @@ export default function VirtualTour() {
               <a href="#galeri" className="hover:text-(--color-terracotta)">
                 {t.virtualTour.navGallery}
               </a>
-            </nav>
+            </nav> */}
 
             <span className="ml-auto flex h-7 w-7 items-center justify-center rounded-md bg-white/10 text-white">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
