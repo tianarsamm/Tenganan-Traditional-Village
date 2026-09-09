@@ -22,9 +22,6 @@ export default function Tenun() {
 
       <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-2">
         <div>
-          <span className="text-sm font-medium uppercase tracking-widest text-(--color-terracotta-soft)">
-            {t.tenun.sectionLabel}
-          </span>
           <h2 className="mt-2 font-serif text-3xl font-bold text-(--color-terracotta-soft) md:text-4xl">
             {t.tenun.title}
           </h2>
@@ -44,19 +41,20 @@ export default function Tenun() {
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <Link
               href="/produk"
-              className="inline-block rounded-full bg-(--color-terracotta) px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-(--color-terracotta-hover)"
+              className="inline-block rounded-br-2xl bg-(--color-terracotta) px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-(--color-terracotta-hover)"
             >
               {t.nav.belanja}
             </Link>
           </div>
         </div>
 
-        <div className="relative aspect-4/3 w-full overflow-hidden rounded-xl">
+        <div className="relative aspect-4/3 w-full overflow-hidden">
           <Image
             src="/images/desa/main.jpg"
             alt={t.tenun.imageAlt}
             fill
             className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
       </div>

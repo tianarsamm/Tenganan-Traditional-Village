@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useSyncExternalStore, ReactNode } from "react";
 import { translations, Language } from "@/data/translations";
 
 interface LanguageContextType {
@@ -11,19 +11,33 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>(() => {
-    if (typeof window === "undefined") {
-      return "id";
-    }
+const LANGUAGE_EVENT = "language-preference-change";
 
-    const saved = localStorage.getItem("language");
-    return saved === "id" || saved === "en" ? saved : "id";
-  });
+function getLanguageSnapshot(): Language {
+  if (typeof window === "undefined") return "id";
+  const saved = localStorage.getItem("language");
+  return saved === "id" || saved === "en" ? saved : "id";
+}
+
+function subscribeToLanguagePreference(onChange: () => void) {
+  window.addEventListener("storage", onChange);
+  window.addEventListener(LANGUAGE_EVENT, onChange);
+  return () => {
+    window.removeEventListener("storage", onChange);
+    window.removeEventListener(LANGUAGE_EVENT, onChange);
+  };
+}
+
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const language = useSyncExternalStore(
+    subscribeToLanguagePreference,
+    getLanguageSnapshot,
+    () => "id" as Language
+  );
 
   const setLanguage = (lang: Language) => {
-    setLanguageState(lang);
     localStorage.setItem("language", lang);
+    window.dispatchEvent(new Event(LANGUAGE_EVENT));
   };
 
   return (

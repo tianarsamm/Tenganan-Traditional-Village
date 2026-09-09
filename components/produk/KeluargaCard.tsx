@@ -15,10 +15,10 @@ export default function KeluargaCard({ keluarga }: KeluargaCardProps) {
   const { t, language } = useLanguage();
 
   return (
-    <div className="group overflow-hidden rounded-2xl border border-(--color-dark)/10 bg-(--color-card) p-3 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+    <div className="group overflow-hidden border border-(--color-dark)/10 bg-(--color-card) p-3 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
       <Link
         href={`/produk/${keluarga.slug}`}
-        className="relative block aspect-4/3 w-full overflow-hidden rounded-xl bg-(--color-cream)"
+        className="relative block aspect-4/3 w-full overflow-hidden bg-(--color-cream)"
       >
         {gambarUtama && (
           <Image
@@ -59,7 +59,7 @@ export default function KeluargaCard({ keluarga }: KeluargaCardProps) {
         <div className="mt-4 flex items-center gap-2">
           <Link
             href={`/produk/${keluarga.slug}`}
-            className="flex-1 rounded-xl bg-(--color-terracotta) px-4 py-2.5 text-center text-sm font-medium text-white transition-colors hover:bg-(--color-terracotta-hover)"
+            className="flex-1 bg-(--color-terracotta) px-4 py-2.5 text-center text-sm font-medium text-white transition-colors hover:bg-(--color-terracotta-hover)"
           >
             {t.produk.detailButton}
           </Link>
@@ -69,7 +69,7 @@ export default function KeluargaCard({ keluarga }: KeluargaCardProps) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-(--color-terracotta-soft) text-(--color-terracotta) transition-colors hover:bg-(--color-terracotta) hover:text-white"
+            className="flex h-10 w-10 shrink-0 items-center justify-center bg-(--color-terracotta-soft) text-(--color-terracotta) transition-colors hover:bg-(--color-terracotta) hover:text-white"
             aria-label="Hubungi via WhatsApp"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">

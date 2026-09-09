@@ -1,7 +1,8 @@
 export interface TourGuide {
   slug: string;
   nama: string;
-  usia: number;
+  gender: string;
+  usia: string;
+  nomorWa: number | null;
   foto: string;
-  noWa: string;
 }

@@ -1,26 +1,75 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 
-function LanguageToggle({}: { mobile?: boolean }) {
+const LANGUAGES = {
+  id: { label: "Indonesia", flag: "🇮🇩" },
+  en: { label: "English", flag: "🇬🇧" },
+} as const;
+
+function LanguageToggle({ mobile }: { mobile?: boolean }) {
   const { language, setLanguage } = useLanguage();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <div className="flex items-center rounded-full border border-(--color-dark)/20 p-0.5 text-xs font-semibold">
-      {(["id", "en"] as const).map((lang) => (
-        <button
-          key={lang}
-          onClick={() => setLanguage(lang)}
-          className={`rounded-full px-2.5 py-1 uppercase transition-colors ${
-            language === lang
-              ? "bg-(--color-terracotta) text-white"
-              : "text-(--color-dark)/60 hover:text-(--color-dark)"
+    <div className="relative" ref={ref}>
+      <button
+        onClick={() => setOpen((prev) => !prev)}
+        aria-label="Pilih bahasa"
+        className="flex items-center gap-1 border border-(--color-dark)/20 px-2.5 py-1 text-xs font-semibold text-(--color-dark)/70 transition-colors hover:text-(--color-dark)"
+      >
+        <span className="text-base leading-none">{LANGUAGES[language].flag}</span>
+        <svg
+          width="10"
+          height="10"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="3"
+          className={`transition-transform ${open ? "rotate-180" : ""}`}
+        >
+          <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+
+      {open && (
+        <div
+          className={`absolute top-full z-50 mt-1 w-32 border border-(--color-dark)/20 bg-white text-xs font-semibold shadow-md ${
+            mobile ? "right-0" : "left-0"
           }`}
         >
-          {lang}
-        </button>
-      ))}
+          {(Object.keys(LANGUAGES) as Array<keyof typeof LANGUAGES>).map((lang) => (
+            <button
+              key={lang}
+              onClick={() => {
+                setLanguage(lang);
+                setOpen(false);
+              }}
+              className={`flex w-full items-center gap-2 px-2.5 py-1.5 text-left transition-colors ${
+                language === lang
+                  ? "bg-(--color-terracotta) text-white"
+                  : "text-(--color-dark)/70 hover:bg-(--color-dark)/5 hover:text-(--color-dark)"
+              }`}
+            >
+              <span className="text-base leading-none">{LANGUAGES[lang].flag}</span>
+              <span>{LANGUAGES[lang].label}</span>
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -104,8 +153,8 @@ export default function Navbar() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-30 px-4 py-4 sm:px-6">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-xl border border-white/20 bg-white/90 px-6 py-3 shadow-xl shadow-black/10 backdrop-blur-md">
-        <Link href="/" className="font-serif text-lg font-bold tracking-wide text-(--color-dark)">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4  border border-white/20 bg-white/90 px-6 py-3 shadow-xl shadow-black/10 backdrop-blur-md">
+        <Link href="/" className="font-body text-lg font-semibold tracking-wide text-(--color-dark)">
           {t.nav.judul1}
           <span className="block text-xs font-normal tracking-widest text-(--color-terracotta)">
             {t.nav.judul2}
@@ -134,7 +183,7 @@ export default function Navbar() {
           <LanguageToggle />
           <Link
             href="/produk"
-            className="rounded-full bg-(--color-terracotta) px-5 py-2 text-sm font-medium text-white transition duration-200 ease-out hover:bg-(--color-terracotta-hover)"
+            className=" bg-(--color-terracotta) px-5 py-2 text-sm font-medium text-white transition duration-200 ease-out hover:bg-(--color-terracotta-hover)"
           >
             {t.nav.belanja}
           </Link>

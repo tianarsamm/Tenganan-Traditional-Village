@@ -28,13 +28,7 @@ export const translations = {
     },
     galeri: {
       sectionLabel: "Dokumentasi",
-      title: "Galeri Produk & Budaya",
-      categories: {
-        tenun: "Tenun",
-        upacara: "Upacara",
-        panorama: "Panorama",
-      },
-      kategoriList: ["Semua", "Budaya", "Alam", "Tenun", "Festival"],
+      title: "Galeri Desa Adat Tenganan",
       imageAlts: [
         "Upacara adat desa",
         "Pemandangan alam desa",
@@ -46,7 +40,7 @@ export const translations = {
         "Perayaan budaya",
       ],
       moreLabel: "Lainnya",
-      emptyMessage: "Belum ada foto untuk kategori ini.",
+      emptyMessage: "Belum ada foto di galeri.",
     },
     virtualTour: {
       title: "Tur Virtual Desa Tenganan",
@@ -98,6 +92,9 @@ export const translations = {
       developedBy: "Website ini dikembangkan oleh",
       developedByLink: "Veluxa Studio",
       visit: "Kunjungi Kami",
+      brandLabel: "DESA ADAT",
+      villageName: "TENGANAN",
+
     },
     produk: {
       sectionLabel: "Karya Penenun Desa",
@@ -187,7 +184,7 @@ export const translations = {
 
     tourGuide: {
       sectionLabel: "Pemandu Wisata",
-    title: "Tour Guide Lokal",
+    title: "Pemandu Wisata Lokal",
     description:
       "Jelajahi Desa Adat Tenganan bersama pemandu wisata lokal yang memahami sejarah, budaya, dan tradisi desa secara langsung.",
     cta: "Lihat Daftar Tour Guide",
@@ -199,7 +196,7 @@ tourGuidePage: {
     description: "Kenali pemandu wisata lokal yang siap menemani perjalanan kamu menjelajahi desa.",
     tahun: "tahun",
     emptyMessage: "Belum ada tour guide yang tersedia saat ini.",
-    contactButton: "Hubungi via WhatsApp",
+    contactButton: "Kontak sekarang",
 }
 
   },
@@ -233,13 +230,7 @@ tourGuidePage: {
     },
     galeri: {
       sectionLabel: "Documentation",
-      title: "Gallery of Products & Culture",
-      categories: {
-        tenun: "Weaving",
-        upacara: "Ceremonies",
-        panorama: "Panorama",
-      },
-      kategoriList: ["All", "Culture", "Nature", "Weaving", "Festival"],
+      title: "Gallery of Tenganan Traditional Village",
       imageAlts: [
         "Traditional village ceremony",
         "Village nature scenery",
@@ -251,7 +242,7 @@ tourGuidePage: {
         "Cultural celebration",
       ],
       moreLabel: "More",
-      emptyMessage: "No photos available for this category.",
+      emptyMessage: "No photos available in the gallery.",
     },
     virtualTour: {
       sectionLabel: "360°",
@@ -303,6 +294,8 @@ tourGuidePage: {
       developedBy: "This website was developed by",
       developedByLink: "Veluxa Studio",
       visit: "Visit Us",
+      brandLabel: "TRADITIONAL VILLAGE",
+      villageName: "TENGANAN",
     },
     produk: {
       sectionLabel: "Village Weavers",
@@ -381,14 +374,13 @@ tourGuidePage: {
     visiLabel: "Vision",
     visiTitle: "Village Vision",
     visiText:
-      "To become an economically self-sufficient traditional village through tourism and weaving craftsmanship, without abandoning the cultural values and customs of its ancestors.",
+      "To create a clean, healthy, orderly, and beautiful Tenganan Village.",
     misiLabel: "Mission",
     misiTitle: "Village Mission",
     misiList: [
-      "Preserve ancestral traditions and customs across generations.",
-      "Develop cultural and nature tourism potential sustainably.",
-      "Empower local weavers through broader market access.",
-      "Protect the village's environment and protected forest area.",
+      "To create and maintain a safe and orderly environment for the community.",
+      "To explore, preserve, and develop cultural values, customs, and beliefs in accordance with the philosophy of 'Tri Hita Karana'.",
+      "To provide space for the community to express opinions, suggestions, and feedback freely, fostering a democratic atmosphere in all village meetings and discussions.",
     ],
 
     tourGuide: {
@@ -405,7 +397,7 @@ tourGuidePage: {
     description: "Meet the local tour guides ready to accompany your journey exploring the village.",
     tahun: "years old",
     emptyMessage: "No tour guides available at the moment.",
-    contactButton: "Contact via WhatsApp",
+    contactButton: "Contact now",
 },
   },
 } as const;

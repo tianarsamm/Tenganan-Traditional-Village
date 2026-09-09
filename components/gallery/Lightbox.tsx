@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Image from "next/image";
 
 interface LightboxImage {
   src: string;
@@ -41,7 +42,7 @@ export default function Lightbox({ images, activeIndex, onClose, onNavigate }: L
       <button
         onClick={onClose}
         aria-label="Tutup"
-        className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+        className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center bg-white/10 text-white transition-colors hover:bg-white/20"
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M6 6L18 18M6 18L18 6" strokeLinecap="round" />
@@ -68,11 +69,13 @@ export default function Lightbox({ images, activeIndex, onClose, onNavigate }: L
       </button>
 
       {/* Gambar utama */}
-      <img
+      <Image
         src={current.src}
         alt={current.alt}
+        width={1600}
+        height={1200}
         onClick={(e) => e.stopPropagation()}
-        className="max-h-[85vh] max-w-full rounded-lg object-contain"
+        className="max-h-[85vh] max-w-full object-contain"
       />
 
       {/* Tombol next */}

@@ -1,4 +1,4 @@
-import { tourGuideList } from "@/data/tourguide";
+import { getTourGuideList } from "@/data/tourguide";
 import TourGuideGrid from "@/components/tourguide/TourGuideGrid";
 import TourGuidePageHeading from "@/components/tourguide/TourGuidePageHeading";
 import NavbarDetail from "@/components/layout/NavbarDetail";
@@ -6,9 +6,14 @@ import NavbarDetail from "@/components/layout/NavbarDetail";
 export const metadata = {
   title: "Tour Guide Desa | Desa Adat Tenganan",
   description: "Kenali para pemandu wisata lokal Desa Adat Tenganan.",
+  alternates: {
+    canonical: "/tour-guide",
+  },
 };
 
-export default function TourGuidePage() {
+export default async function TourGuidePage() {
+  const tourGuideList = await getTourGuideList();
+
   return (
     <>
       <NavbarDetail />

@@ -1,13 +1,18 @@
-import { keluargaList } from "@/data/keluarga";
+import { getAllKeluarga } from "@/data/keluarga";
 import KeluargaGrid from "@/components/produk/KeluargaGrid";
 import Navbar from "@/components/layout/NavbarDetail";
 
 export const metadata = {
   title: "Kain Tenun Desa | Halaman Penjualan",
   description: "Jelajahi koleksi kain tenun asli hasil karya para penenun desa.",
+  alternates: {
+    canonical: "/produk",
+  },
 };
 
-export default function ProdukPage() {
+export default async function ProdukPage() {
+  const keluargaList = await getAllKeluarga();
+
   return (
     <>
       <Navbar />
