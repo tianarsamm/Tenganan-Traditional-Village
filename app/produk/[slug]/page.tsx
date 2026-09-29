@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { getAllKeluarga, getKeluargaBySlug, localize } from "@/data/keluarga";
 import KeluargaDetailGallery from "@/components/produk/KeluargaDetailGallery";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://tengananpegringsingan.com";
 
 interface DetailPageProps {
   params: Promise<{ slug: string }>;

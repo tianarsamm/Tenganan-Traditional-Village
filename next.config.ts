@@ -11,9 +11,9 @@ const nextConfig: NextConfig = {
         pathname: "/uploads/**",
       },
       {
-        // Production: ganti dengan domain Strapi/VPS asli kamu
+        // Production: domain publik Strapi
         protocol: "https",
-        hostname: "YOUR-STRAPI-DOMAIN.com",
+        hostname: "tengananpegringsingan.com",
         pathname: "/uploads/**",
       },
     ],
@@ -53,21 +53,20 @@ const nextConfig: NextConfig = {
             value: "1; mode=block",
           },
           {
-            // Content Security Policy — sesuaikan domain saat production
-            key: "Content-Security-Policy",
-            value: [
-              "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net",
-              "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
-              // izinkan gambar dari localhost (dev) dan domain Strapi production
-              "img-src 'self' data: blob: http://localhost:1337 https://YOUR-STRAPI-DOMAIN.com https://*.googleusercontent.com",
-              "connect-src 'self' http://localhost:1337 https://YOUR-STRAPI-DOMAIN.com",
-              "frame-src 'self' https://www.google.com", // untuk embed Google Maps
-              "font-src 'self' data:",
-              "object-src 'none'",
-              "base-uri 'self'",
-            ].join("; "),
-          },
+  // Content Security Policy — sesuaikan domain saat production
+  key: "Content-Security-Policy",
+  value: [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net",
+    "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
+    "img-src 'self' data: blob: http://localhost:1337 https://tengananpegringsingan.com https://*.googleusercontent.com",
+    "connect-src 'self' http://localhost:1337 https://tengananpegringsingan.com",
+    "frame-src 'self' https://www.google.com https://tengananvillage-tour.pages.dev", // untuk embed Google Maps dan Virtual Tour
+    "font-src 'self' data:",
+    "object-src 'none'",
+    "base-uri 'self'",
+  ].join("; "),
+},
         ],
       },
     ];

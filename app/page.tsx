@@ -9,7 +9,7 @@ import TourGuideSection from "@/components/sections/TourGuideSection";
 // import KontakLokasi from "@/components/sections/KontakLokasi";
 import { getGaleriItems } from "@/data/galeri";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://tengananpegringsingan.com";
 
 const structuredData = {
   "@context": "https://schema.org",

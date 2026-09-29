@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 const LANGUAGES = {
@@ -125,8 +126,9 @@ export default function NavbarDetail() {
           <LanguageToggle />
           <Link
             href="/produk"
-            className="bg-(--color-terracotta) px-5 py-2 text-sm font-medium text-white transition duration-200 ease-out hover:bg-(--color-terracotta-hover)"
+            className="flex items-center gap-2 bg-(--color-terracotta) px-5 py-2 text-sm font-medium text-white transition duration-200 ease-out hover:bg-(--color-terracotta-hover)"
           >
+            <Image src="/cart-logo.svg" alt="" width={18} height={18} className="brightness-0 invert" />
             {t.nav.belanja}
           </Link>
         </div>
@@ -205,8 +207,9 @@ export default function NavbarDetail() {
         <Link
           href="/produk"
           onClick={() => setMenuOpen(false)}
-          className="mt-4 block rounded-full bg-(--color-terracotta) px-5 py-3 text-center text-sm font-medium text-white transition-colors hover:bg-(--color-terracotta-hover)"
+          className="mt-4 flex items-center justify-center gap-2 rounded-full bg-(--color-terracotta) px-5 py-3 text-center text-sm font-medium text-white transition-colors hover:bg-(--color-terracotta-hover)"
         >
+          <Image src="/cart-logo.svg" alt="" width={18} height={18} className="brightness-0 invert" />
           {t.nav.belanja}
         </Link>
       </aside>

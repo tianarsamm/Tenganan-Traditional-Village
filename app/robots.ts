@@ -1,7 +1,7 @@
 // app/robots.ts — otomatis expose di /robots.txt
 import type { MetadataRoute } from "next";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://tengananpegringsingan.com";
 
 export default function robots(): MetadataRoute.Robots {
   return {

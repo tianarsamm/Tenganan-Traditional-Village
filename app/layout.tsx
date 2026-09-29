@@ -3,7 +3,7 @@ import { LanguageProvider } from "@/context/LanguageContext";
 import "./globals.css";
 import { batikSans, cabinetGrotesk } from '@/lib/fonts'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://tengananpegringsingan.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
