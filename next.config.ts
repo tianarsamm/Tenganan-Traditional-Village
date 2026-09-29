@@ -59,7 +59,7 @@ const nextConfig: NextConfig = {
               "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
               "img-src 'self' data: blob: http://localhost:1337 https://cms.tengananpegringsingan.com https://*.googleusercontent.com",
               "connect-src 'self' http://localhost:1337 https://cms.tengananpegringsingan.com",
-              "frame-src 'self' https://www.google.com https://tengananvillage-tour.pages.dev",
+              "frame-src 'self' https://www.google.com https://tenganan-tour.pages.dev https://tengananvillage-tour.pages.dev",
               "font-src 'self' data:",
               "object-src 'none'",
               "base-uri 'self'",
