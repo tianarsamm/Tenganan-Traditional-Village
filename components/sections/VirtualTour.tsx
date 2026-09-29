@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 const TOUR_URL =
   process.env.NEXT_PUBLIC_TOUR_URL ?? "https://tenganan-tour.pages.dev/index.htm";
@@ -9,6 +10,7 @@ export default function VirtualTour() {
   const [started, setStarted] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const frameRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const onChange = () => setIsFullscreen(!!document.fullscreenElement);
@@ -31,11 +33,8 @@ export default function VirtualTour() {
       <div className="mx-auto max-w-6xl px-4">
         <div className="mb-6">
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-            Virtual Tour
+            {t.virtualTour.title}
           </h2>
-          <p className="mt-2 text-neutral-600">
-            Jelajahi Desa Adat Tenganan Pegringsingan secara virtual.
-          </p>
         </div>
 
         <div
@@ -106,7 +105,7 @@ export default function VirtualTour() {
                 </svg>
               </span>
               <span className="text-lg font-semibold tracking-wide">
-                Mulai Virtual Tour
+                {t.nav.deskVirtualTour}
               </span>
             </button>
           )}
