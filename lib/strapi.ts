@@ -1,4 +1,6 @@
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
+
+const STRAPI_URL =
+  process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
 
 export function strapiImageUrl(url: string): string {
   if (!url) return "";
@@ -8,13 +10,18 @@ export function strapiImageUrl(url: string): string {
 
 export async function strapiFetch<T>(path: string): Promise<T> {
   const res = await fetch(`${STRAPI_URL}/api${path}`, {
-    // Revalidate tiap 60 detik, sesuaikan nanti kalau perlu lebih real-time
+    headers: {
+      Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+    },
     next: { revalidate: 60 },
   });
 
   if (!res.ok) {
-    throw new Error(`Strapi fetch failed: ${res.status} ${res.statusText} for ${path}`);
+    throw new Error(
+      `Strapi fetch failed: ${res.status} ${res.statusText} for ${path}`
+    );
   }
 
   return res.json();
 }
+
