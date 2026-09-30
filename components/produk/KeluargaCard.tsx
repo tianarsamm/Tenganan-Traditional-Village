@@ -5,6 +5,7 @@ import Link from "next/link";
 import { KeluargaTenun } from "@/types/keluarga";
 import { getHargaRange as getRange, localize } from "@/data/keluarga";
 import { useLanguage } from "@/context/LanguageContext";
+import { buildWaLink } from "@/lib/whatsapp";
 
 interface KeluargaCardProps {
   keluarga: KeluargaTenun;
@@ -13,6 +14,7 @@ interface KeluargaCardProps {
 export default function KeluargaCard({ keluarga }: KeluargaCardProps) {
   const gambarUtama = keluarga.kategori[0]?.gambar[0];
   const { t, language } = useLanguage();
+  const waLink = buildWaLink(keluarga.noWa);
 
   return (
     <div className="group overflow-hidden border border-(--color-dark)/10 bg-(--color-card) p-3 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
@@ -65,7 +67,7 @@ export default function KeluargaCard({ keluarga }: KeluargaCardProps) {
           </Link>
 
           <a
-            href={`https://wa.me/${keluarga.noWa}`}
+            href={waLink}
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}

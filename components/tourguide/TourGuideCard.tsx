@@ -4,6 +4,7 @@ import Image from "next/image";
 import { TourGuide } from "@/types/tourguide";
 import { useLanguage } from "@/context/LanguageContext";
 import { WhatsAppIcon } from "@/components/icons/SocialIcons";
+import { normalizeWaNumber, buildWaLink } from "@/lib/whatsapp";
 
 interface TourGuideCardProps {
   guide: TourGuide;
@@ -11,12 +12,8 @@ interface TourGuideCardProps {
 
 export default function TourGuideCard({ guide }: TourGuideCardProps) {
   const { t } = useLanguage();
-  const rawWhatsappNumber = guide.nomorWa ? String(guide.nomorWa).replace(/\D/g, "") : "";
-  const whatsappNumber = rawWhatsappNumber
-    ? rawWhatsappNumber.startsWith("62")
-      ? rawWhatsappNumber
-      : `62${rawWhatsappNumber.replace(/^0/, "")}`
-    : null;
+  const hasWhatsapp = normalizeWaNumber(guide.nomorWa) !== "";
+  const waLink = buildWaLink(guide.nomorWa);
 
   return (
     <div className="group overflow-hidden border border-(--color-dark)/10 bg-(--color-card) p-3 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
@@ -36,9 +33,9 @@ export default function TourGuideCard({ guide }: TourGuideCardProps) {
             {guide.nama}
           </h3>
 
-          {whatsappNumber && (
+          {hasWhatsapp && (
             <a
-              href={`https://wa.me/${whatsappNumber}`}
+              href={waLink}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${t.tourGuidePage.contactButton} ${guide.nama}`}

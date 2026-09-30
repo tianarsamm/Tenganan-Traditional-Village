@@ -6,6 +6,7 @@ import Link from "next/link";
 import { KeluargaTenun } from "@/types/keluarga";
 import { localize } from "@/data/keluarga";
 import { useLanguage } from "@/context/LanguageContext";
+import { buildWaLink } from "@/lib/whatsapp";
 
 interface KeluargaDetailGalleryProps {
   keluarga: KeluargaTenun;
@@ -15,11 +16,15 @@ export default function KeluargaDetailGallery({ keluarga }: KeluargaDetailGaller
   const { t, language } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
   const activeKategori = keluarga.kategori[activeIndex];
-  
 
   const namaKeluarga = localize(keluarga.namaKeluarga, language);
   const namaKategori = localize(activeKategori.nama, language);
   const deskripsi = activeKategori.deskripsi ? localize(activeKategori.deskripsi, language) : null;
+
+  const waLink = buildWaLink(
+    keluarga.noWa,
+    `Halo, saya tertarik dengan ${namaKategori} dari ${namaKeluarga}`
+  );
 
   const goPrev = () => {
     setActiveIndex((i) => (i === 0 ? keluarga.kategori.length - 1 : i - 1));
@@ -123,9 +128,7 @@ export default function KeluargaDetailGallery({ keluarga }: KeluargaDetailGaller
         )}
 
         <a
-          href={`https://wa.me/${keluarga.noWa}?text=${encodeURIComponent(
-            `Halo, saya tertarik dengan ${namaKategori} dari ${namaKeluarga}`
-          )}`}
+          href={waLink}
           target="_blank"
           rel="noopener noreferrer"
           className="mt-8 flex w-full items-center justify-center gap-2 rounded-br-2xl bg-(--color-terracotta) px-6 py-3.5 text-sm font-medium text-white transition-colors hover:bg-(--color-terracotta-hover) md:w-auto md:inline-flex"
