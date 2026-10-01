@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { fetchMyKeluarga, getToken, logout } from '@/lib/auth';
 import { createProduk, updateProduk, deleteProduk, ProdukInput } from '@/lib/produk';
@@ -38,6 +38,7 @@ function getImages(gambar: Produk['gambar']): GambarStrapi[] {
 
 export default function DashboardKeluargaPage() {
   const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [keluarga, setKeluarga] = useState<KeluargaDashboard | null>(null);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -55,6 +56,9 @@ export default function DashboardKeluargaPage() {
     deskripsi_en: '',
   });
   const [gambarFiles, setGambarFiles] = useState<FileList | null>(null);
+
+  const fileCount = gambarFiles?.length ?? 0;
+  const fileNames = gambarFiles ? Array.from(gambarFiles).map((f) => f.name) : [];
 
   // Preview file baru yang dipilih, dibersihkan otomatis saat berubah
   const newPreviews = useMemo(
@@ -90,9 +94,14 @@ export default function DashboardKeluargaPage() {
     loadData();
   }, [loadData, router]);
 
+  function clearFiles() {
+    setGambarFiles(null);
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  }
+
   function resetForm() {
     setForm({ nama_id: '', nama_en: '', harga: 0, deskripsi_id: '', deskripsi_en: '' });
-    setGambarFiles(null);
+    clearFiles();
     setCurrentImages([]);
     setEditingId(null);
     setShowForm(false);
@@ -119,7 +128,7 @@ export default function DashboardKeluargaPage() {
       deskripsi_en: produk.deskripsi_en || '',
     });
     setCurrentImages(getImages(produk.gambar));
-    setGambarFiles(null);
+    clearFiles();
     setEditingId(produk.documentId);
     setShowForm(true);
   }
@@ -315,18 +324,53 @@ export default function DashboardKeluargaPage() {
                 </div>
               )}
 
-              <input
-                type="file"
-                accept="image/*"
-                multiple
-                onChange={(e) => setGambarFiles(e.target.files)}
-                className="w-full border border-dashed border-(--color-dark)/20 bg-white px-3 py-3 text-sm"
-              />
-              {editingId && (
-                <p className="mt-1.5 text-xs text-(--color-text-muted)">
-                  Kosongkan jika tidak ingin mengganti gambar.
-                </p>
-              )}
+              {/* Tombol unggah: tombol dan status file dipisahkan */}
+              <div className="flex flex-wrap items-center gap-3 border border-dashed border-(--color-dark)/20 bg-white p-3">
+                <input
+                  ref={fileInputRef}
+                  id="gambar-produk"
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={(e) => setGambarFiles(e.target.files)}
+                  className="peer sr-only"
+                />
+                <label
+                  htmlFor="gambar-produk"
+                  className="inline-flex cursor-pointer items-center gap-2 bg-(--color-dark) px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-(--color-dark-soft) peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-(--color-terracotta)"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                    <path d="M12 16V4M12 4l-4 4M12 4l4 4M4 16v3a1 1 0 001 1h14a1 1 0 001-1v-3" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  {editingId ? 'Ganti gambar' : 'Pilih gambar'}
+                </label>
+
+                <span
+                  className={`min-w-0 flex-1 truncate text-sm ${
+                    fileCount > 0 ? 'text-(--color-text)' : 'italic text-(--color-text-muted)'
+                  }`}
+                  title={fileNames.join(', ')}
+                >
+                  {fileCount > 0
+                    ? `${fileCount} file dipilih: ${fileNames.join(', ')}`
+                    : 'Belum ada file dipilih'}
+                </span>
+
+                {fileCount > 0 && (
+                  <button
+                    type="button"
+                    onClick={clearFiles}
+                    className="text-sm font-medium text-red-700/80 transition-colors hover:text-red-700"
+                  >
+                    Hapus pilihan
+                  </button>
+                )}
+              </div>
+
+              <p className="mt-1.5 text-xs text-(--color-text-muted)">
+                Anda bisa memilih lebih dari satu gambar.
+                {editingId && ' Kosongkan jika tidak ingin mengganti gambar.'}
+              </p>
             </div>
 
             {error && <p className="text-red-600 text-sm">{error}</p>}
