@@ -14,7 +14,6 @@ function authHeaders() {
   return { Authorization: `Bearer ${token}` };
 }
 
-// Sesi habis / token tidak valid: hapus token dan kembali ke halaman login
 function handleUnauthorized(): never {
   localStorage.removeItem('keluarga_jwt');
   if (typeof window !== 'undefined') {
@@ -33,8 +32,6 @@ async function parseError(res: Response, fallback: string): Promise<Error> {
   }
 }
 
-// Strapi 5: file diunggah dulu, lalu dihubungkan lewat ID.
-// Jangan set Content-Type manual, biarkan browser mengatur boundary FormData.
 async function uploadGambar(files: FileList): Promise<number[]> {
   const formData = new FormData();
   Array.from(files).forEach((file) => formData.append('files', file));
@@ -68,7 +65,6 @@ export async function createProduk(data: ProdukInput, gambarFiles?: FileList | n
   return res.json();
 }
 
-// documentId (string), bukan id numerik
 export async function updateProduk(
   documentId: string,
   data: Partial<ProdukInput>,
@@ -76,8 +72,6 @@ export async function updateProduk(
 ) {
   const payload: Record<string, unknown> = { ...data };
 
-  // Field gambar hanya dikirim kalau ada file baru,
-  // supaya gambar lama tidak terhapus saat hanya edit teks.
   if (gambarFiles && gambarFiles.length > 0) {
     payload.gambar = await uploadGambar(gambarFiles);
   }
@@ -99,6 +93,5 @@ export async function deleteProduk(documentId: string) {
   });
 
   if (!res.ok) throw await parseError(res, 'Gagal menghapus produk.');
-  // DELETE di Strapi 5 mengembalikan 204 tanpa body
   return true;
 }
