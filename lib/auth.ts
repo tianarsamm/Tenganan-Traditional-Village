@@ -1,4 +1,5 @@
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+const STRAPI_URL =
+  process.env.NEXT_PUBLIC_STRAPI_URL || 'https://cms.tengananpegringsingan.com';
 
 export interface StrapiAuthResponse {
   jwt: string;
@@ -44,6 +45,7 @@ export async function fetchMyKeluarga() {
 
   const res = await fetch(`${STRAPI_URL}/api/keluarga-tenuns/me`, {
     headers: { Authorization: `Bearer ${token}` },
+    cache: 'no-store',
   });
 
   if (!res.ok) {
