@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { fetchMyKeluarga, getToken, logout } from '@/lib/auth';
 import { createProduk, updateProduk, deleteProduk, ProdukInput } from '@/lib/produk';
@@ -177,15 +178,23 @@ export default function DashboardKeluargaPage() {
             <p className="text-xs font-medium uppercase tracking-[0.25em] text-(--color-terracotta)">Ruang Keluarga Tenun</p>
             <h1 className="mt-1 text-xl font-bold sm:text-2xl">Halo, {keluarga?.nama_keluarga_id}</h1>
           </div>
-          <button
-            onClick={() => {
-              logout();
-              router.push('/keluarga/login');
-            }}
-            className="border border-white/20 px-3 py-2 text-sm text-white/75 transition-colors hover:border-(--color-terracotta) hover:text-white"
-          >
-            Keluar
-          </button>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/keluarga/ganti-password"
+              className="border border-white/20 px-3 py-2 text-sm text-white/75 transition-colors hover:border-(--color-terracotta) hover:text-white"
+            >
+              Ganti password
+            </Link>
+            <button
+              onClick={() => {
+                logout();
+                router.push('/keluarga/login');
+              }}
+              className="border border-white/20 px-3 py-2 text-sm text-white/75 transition-colors hover:border-(--color-terracotta) hover:text-white"
+            >
+              Keluar
+            </button>
+          </div>
         </div>
       </header>
 

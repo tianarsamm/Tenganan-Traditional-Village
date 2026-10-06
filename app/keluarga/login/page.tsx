@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { loginKeluarga, saveToken } from '@/lib/auth';
@@ -80,6 +81,14 @@ export default function LoginKeluargaPage() {
                 className="w-full border-b border-(--color-dark)/20 bg-transparent px-0 py-3 text-(--color-text) outline-none transition-colors placeholder:text-(--color-text-muted)/60 focus:border-(--color-terracotta)"
                 placeholder="Masukkan password"
               />
+              <div className="mt-2 text-right">
+                <Link
+                  href="/keluarga/lupa-password"
+                  className="text-sm text-(--color-text-muted) transition-colors hover:text-(--color-terracotta)"
+                >
+                  Lupa password?
+                </Link>
+              </div>
             </div>
           </div>
 
@@ -96,6 +105,13 @@ export default function LoginKeluargaPage() {
           <button type="button" onClick={() => router.push('/')} className="mt-5 w-full text-center text-sm text-(--color-text-muted) transition-colors hover:text-(--color-terracotta)">
             Kembali ke halaman utama
           </button>
+
+          <p className="mt-6 text-center text-sm text-(--color-text-muted)">
+            Belum punya akun?{' '}
+            <Link href="/keluarga/daftar" className="font-medium text-(--color-terracotta) hover:underline">
+              Daftarkan keluarga Anda
+            </Link>
+          </p>
         </form>
       </div>
     </main>
